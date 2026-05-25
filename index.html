@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جذور الطبيعة | تجارة الأعشاب والنباتات الطبية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --cream:#F5F0E8;--cream-dark:#EDE5D4;
+    --forest:#1A3A2A;--forest-mid:#2D5A3D;--forest-light:#4A7C5F;
+    --sage-light:#B5CEB8;--gold:#C8A84B;--gold-light:#E8C96B;
+    --text-dark:#1A2010;--text-mid:#3D4A35;--text-light:#6B7A62;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Cairo',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 5%;background:rgba(26,58,42,0.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(200,168,75,0.3)}
+  .nav-logo{font-family:'Amiri',serif;font-size:1.5rem;color:var(--gold-light);letter-spacing:1px;flex-shrink:0}
+  .nav-logo span{color:var(--sage-light)}
+  .nav-links{display:flex;list-style:none;gap:2rem;align-items:center}
+  nav a{color:var(--sage-light);text-decoration:none;font-size:0.92rem;transition:color 0.3s;position:relative;white-space:nowrap}
+  nav a::after{content:'';position:absolute;bottom:-4px;right:0;width:0;height:1px;background:var(--gold);transition:width 0.3s}
+  nav a:hover{color:var(--gold-light)}
+  nav a:hover::after{width:100%}
+  .nav-cta{background:var(--gold)!important;color:var(--forest)!important;padding:.45rem 1.2rem;border-radius:2px;font-weight:700}
+  .nav-cta::after{display:none!important}
+  .nav-cta:hover{background:var(--gold-light)!important;color:var(--forest)!important}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+  .nav-toggle span{display:block;width:24px;height:2px;background:var(--sage-light);border-radius:2px;transition:all 0.3s}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* HERO */
+  .hero{min-height:100vh;background:linear-gradient(160deg,var(--forest) 0%,var(--forest-mid) 50%,#1f4a30 100%);display:flex;align-items:center;position:relative;overflow:hidden;padding:7rem 5% 10rem}
+  .hero-bg-pattern{position:absolute;inset:0;opacity:.04;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:40px 40px}
+  .hero-leaf{position:absolute;opacity:.06;font-size:clamp(8rem,25vw,20rem);line-height:1;top:-1rem;left:-1rem;filter:blur(2px);pointer-events:none}
+  .hero-content{position:relative;z-index:2;max-width:680px;width:100%}
+  .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(200,168,75,.15);border:1px solid rgba(200,168,75,.4);color:var(--gold-light);padding:.35rem 1rem;border-radius:2px;font-size:.8rem;letter-spacing:2px;margin-bottom:1.5rem;animation:fadeUp .8s ease both}
+  .hero h1{font-family:'Amiri',serif;font-size:clamp(2.4rem,7vw,5rem);line-height:1.2;color:#fff;margin-bottom:1.2rem;animation:fadeUp .8s .2s ease both}
+  .hero h1 em{font-style:italic;color:var(--gold-light)}
+  .hero p{font-size:clamp(.95rem,2.5vw,1.1rem);color:var(--sage-light);line-height:1.9;margin-bottom:2rem;max-width:540px;animation:fadeUp .8s .4s ease both;font-weight:300}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s .6s ease both}
+  .btn-primary{background:var(--gold);color:var(--forest);padding:.85rem 2rem;border:none;border-radius:2px;font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .3s;display:inline-block}
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
+  .btn-outline{background:transparent;color:#fff;padding:.85rem 2rem;border:1px solid rgba(255,255,255,.3);border-radius:2px;font-family:'Cairo',sans-serif;font-size:.95rem;cursor:pointer;text-decoration:none;transition:all .3s;display:inline-block}
+  .btn-outline:hover{border-color:var(--gold);color:var(--gold-light)}
+  .hero-stats{position:absolute;bottom:2.5rem;left:5%;right:5%;display:flex;gap:2rem;flex-wrap:wrap;animation:fadeUp .8s .8s ease both}
+  .stat-number{font-family:'Amiri',serif;font-size:clamp(1.8rem,4vw,2.5rem);color:var(--gold-light);line-height:1;display:block}
+  .stat-label{font-size:.75rem;color:var(--sage-light);letter-spacing:1px;margin-top:.2rem}
+
+  /* MARQUEE */
+  .marquee-section{background:var(--forest);padding:1rem 0;overflow:hidden;border-top:1px solid rgba(200,168,75,.2);border-bottom:1px solid rgba(200,168,75,.2)}
+  .marquee-track{display:flex;gap:3rem;animation:marquee 25s linear infinite;white-space:nowrap}
+  .marquee-item{display:flex;align-items:center;gap:.8rem;color:var(--sage-light);font-size:.82rem;letter-spacing:2px}
+  .marquee-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ABOUT */
+  .about{display:grid;grid-template-columns:1fr 1fr;min-height:70vh}
+  .about-visual{background:var(--forest-mid);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:400px}
+  .about-visual-inner{position:relative;z-index:2;text-align:center;padding:2rem}
+  .about-visual svg{width:clamp(180px,30vw,300px);height:auto;opacity:.9}
+  .about-bg-circle{position:absolute;width:500px;height:500px;border-radius:50%;border:1px solid rgba(200,168,75,.1);top:50%;left:50%;transform:translate(-50%,-50%)}
+  .about-bg-circle:nth-child(2){width:350px;height:350px;border-color:rgba(200,168,75,.15)}
+  .about-content{background:var(--cream);padding:4rem 6%;display:flex;flex-direction:column;justify-content:center}
+  .section-tag{display:inline-block;color:var(--forest-light);font-size:.78rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:.8rem;font-weight:600}
+  .section-tag::before{content:'—— ';color:var(--gold)}
+  h2.section-title{font-family:'Amiri',serif;font-size:clamp(1.7rem,3.5vw,2.8rem);color:var(--forest);line-height:1.3;margin-bottom:1.2rem}
+  .section-body{color:var(--text-mid);line-height:2;font-size:.95rem;font-weight:300;margin-bottom:1.8rem}
+  .features-list{list-style:none;display:flex;flex-direction:column;gap:1rem}
+  .features-list li{display:flex;align-items:flex-start;gap:.8rem;color:var(--text-mid);font-size:.9rem}
+  .feat-icon{width:34px;height:34px;background:rgba(74,124,95,.1);border:1px solid rgba(74,124,95,.2);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+  .gold-divider{display:flex;align-items:center;gap:1rem;margin:1.2rem 0}
+  .gold-divider::before,.gold-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(200,168,75,.4),transparent)}
+  .divider-ornament{color:var(--gold);font-size:1rem}
+
+  /* PRODUCTS */
+  .products{padding:5rem 5%;background:var(--cream-dark)}
+  .products-header{text-align:center;margin-bottom:3rem}
+  .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5px;background:rgba(26,58,42,.15)}
+  .product-card{background:var(--cream);padding:2rem 1.8rem;position:relative;overflow:hidden;cursor:pointer;transition:all .4s}
+  .product-card::before{content:'';position:absolute;bottom:0;right:0;width:0;height:3px;background:var(--gold);transition:width .4s}
+  .product-card:hover::before{width:100%}
+  .product-card:hover{background:var(--forest)}
+  .product-card:hover .product-name,.product-card:hover .product-origin{color:#fff}
+  .product-card:hover .product-desc{color:var(--sage-light)}
+  .product-card:hover .product-tag{border-color:rgba(200,168,75,.4);color:var(--gold-light)}
+  .product-icon{width:52px;height:52px;background:rgba(74,124,95,.1);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:1.2rem;transition:all .4s}
+  .product-name{font-family:'Amiri',serif;font-size:1.3rem;color:var(--forest);margin-bottom:.25rem;transition:color .4s}
+  .product-origin{font-size:.75rem;color:var(--text-light);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.8rem;transition:color .4s}
+  .product-desc{font-size:.88rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.2rem;font-weight:300;transition:color .4s}
+  .product-tag{display:inline-block;border:1px solid rgba(74,124,95,.3);color:var(--forest-light);padding:.2rem .7rem;border-radius:1px;font-size:.72rem;letter-spacing:1px;transition:all .4s}
+
+  /* PROCESS */
+  .process{padding:5rem 5%;background:var(--forest);position:relative;overflow:hidden}
+  .process::before{content:'';position:absolute;inset:0;opacity:.03;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:30px 30px}
+  .process-header{text-align:center;margin-bottom:4rem}
+  .process-header .section-tag{color:var(--sage-light)}
+  .process-header h2{color:#fff}
+  .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+  .process-steps::before{content:'';position:absolute;top:2.5rem;right:12.5%;left:12.5%;height:1px;background:rgba(200,168,75,.3);z-index:0}
+  .process-step{text-align:center;padding:0 1rem;position:relative;z-index:1}
+  .step-circle{width:5rem;height:5rem;border-radius:50%;background:var(--forest-mid);border:1px solid rgba(200,168,75,.4);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;font-size:1.7rem;color:var(--gold-light);position:relative}
+  .step-circle::after{content:attr(data-num);position:absolute;top:-8px;left:-8px;width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--forest);font-size:.68rem;font-family:'Cairo',sans-serif;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .step-title{font-family:'Amiri',serif;font-size:1.1rem;color:#fff;margin-bottom:.6rem}
+  .step-desc{font-size:.82rem;color:var(--sage-light);line-height:1.8;font-weight:300}
+
+  /* CERTS */
+  .certs{padding:4rem 5%;background:var(--cream);text-align:center}
+  .certs-grid{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-top:2.5rem}
+  .cert-badge{display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:1.2rem 1.5rem;border:1px solid rgba(26,58,42,.1);border-radius:2px;min-width:130px;transition:all .3s}
+  .cert-badge:hover{border-color:var(--gold);transform:translateY(-3px)}
+  .cert-icon{font-size:2.2rem}
+  .cert-name{font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--forest);font-weight:600}
+  .cert-sub{font-size:.7rem;color:var(--text-light)}
+
+  /* TESTIMONIALS */
+  .testimonials{padding:5rem 5%;background:var(--cream-dark)}
+  .testimonials-header{text-align:center;margin-bottom:3rem}
+  .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+  .testimonial-card{background:var(--cream);padding:2rem;border-right:3px solid var(--gold)}
+  .quote-mark{font-family:'Amiri',serif;font-size:3.5rem;color:var(--gold);line-height:.5;display:block;margin-bottom:1rem;opacity:.5}
+  .testimonial-text{color:var(--text-mid);line-height:1.9;font-style:italic;margin-bottom:1.2rem;font-family:'Amiri',serif;font-size:1rem}
+  .testimonial-author{display:flex;align-items:center;gap:.8rem}
+  .author-avatar{width:42px;height:42px;border-radius:50%;background:var(--forest-mid);display:flex;align-items:center;justify-content:center;color:var(--gold-light);font-family:'Amiri',serif;font-size:1rem;flex-shrink:0}
+  .author-name{font-weight:700;font-size:.88rem;color:var(--forest)}
+  .author-role{font-size:.75rem;color:var(--text-light)}
+
+  /* CTA */
+  .cta-section{background:linear-gradient(135deg,var(--forest) 0%,#0d2a1c 100%);padding:5rem 5%;text-align:center;position:relative;overflow:hidden}
+  .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(200,168,75,.08) 0%,transparent 70%)}
+  .cta-section h2{font-family:'Amiri',serif;font-size:clamp(1.8rem,4vw,3rem);color:#fff;margin-bottom:1.2rem;position:relative}
+  .cta-section p{color:var(--sage-light);font-size:1rem;margin:0 auto 2.5rem;max-width:520px;font-weight:300;line-height:1.9;position:relative}
+  .cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+
+  /* FOOTER */
+  footer{background:#0d2010;padding:3.5rem 5% 2rem;color:var(--sage-light)}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.07)}
+  .footer-brand .nav-logo{display:block;margin-bottom:1rem;font-size:1.6rem}
+  .footer-brand p{font-size:.83rem;line-height:1.9;color:rgba(181,206,184,.6);font-weight:300}
+  .footer-col h4{color:var(--gold-light);font-size:.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.2rem;font-weight:600}
+  .footer-col ul{list-style:none}
+  .footer-col li{margin-bottom:.6rem}
+  .footer-col a{color:rgba(181,206,184,.6);text-decoration:none;font-size:.85rem;transition:color .3s;font-weight:300}
+  .footer-col a:hover{color:var(--gold-light)}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:rgba(181,206,184,.4);flex-wrap:wrap;gap:.5rem}
+  .footer-gold{color:var(--gold)}
+
+  /* ANIMATIONS */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  .fade-in{opacity:0;transform:translateY(25px);transition:opacity .7s ease,transform .7s ease}
+  .fade-in.visible{opacity:1;transform:none}
+
+  /* TABLET */
+  @media(max-width:900px){
+    .about{grid-template-columns:1fr}
+    .about-visual{min-height:280px}
+    .process-steps{grid-template-columns:1fr 1fr;gap:2.5rem}
+    .process-steps::before{display:none}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .footer-brand{grid-column:1/-1}
+  }
+
+  /* MOBILE */
+  @media(max-width:640px){
+    .nav-links{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(16,40,25,.98);flex-direction:column;padding:1.5rem 5%;gap:0;border-bottom:1px solid rgba(200,168,75,.2)}
+    .nav-links.open{display:flex}
+    .nav-links li{width:100%}
+    .nav-links a{display:block;padding:.9rem 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:1rem}
+    .nav-links a::after{display:none}
+    .nav-links .nav-cta{margin-top:.8rem;text-align:center;padding:.75rem;border-radius:2px}
+    .nav-toggle{display:flex}
+
+    .hero{padding:6rem 5% 12rem;align-items:flex-start}
+    .hero-stats{gap:1.2rem;bottom:2rem}
+    .stat-number{font-size:1.6rem}
+    .stat-label{font-size:.68rem}
+    .hero-actions{flex-direction:column}
+    .btn-primary,.btn-outline{text-align:center;width:100%;max-width:300px}
+
+    .products{padding:3.5rem 4%}
+    .process{padding:3.5rem 4%}
+    .testimonials{padding:3.5rem 4%}
+    .certs{padding:3rem 4%}
+    .cta-section{padding:3.5rem 5%}
+    .about-content{padding:2.5rem 5%}
+
+    .process-steps{grid-template-columns:1fr;gap:2rem}
+    .process-step{display:flex;flex-direction:column;align-items:center}
+
+    .footer-grid{grid-template-columns:1fr;gap:2rem}
+    .footer-brand{grid-column:unset}
+
+    .certs-grid{gap:.8rem}
+    .cert-badge{min-width:110px;padding:1rem}
+
+    .cta-actions{flex-direction:column;align-items:center}
+    .cta-actions .btn-primary,.cta-actions .btn-outline{width:100%;max-width:300px;text-align:center}
+  }
+
+  @media(max-width:400px){
+    .hero-stats{gap:.8rem}
+    .stat-number{font-size:1.4rem}
+    .hero{padding-bottom:10rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">جذور <span>الطبيعة</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">عن الشركة</a></li>
+    <li><a href="#products">منتجاتنا</a></li>
+    <li><a href="#process">جودتنا</a></li>
+    <li><a href="#contact" class="nav-cta">تواصل معنا</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="قائمة التنقل">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-leaf">🌿</div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ منذ عام ١٩٩٨ ✦</div>
+    <h1>طبيعة <em>أصيلة</em><br>وأعشاب بلا حدود</h1>
+    <p>نحن شركاؤك الموثوقون في عالم الأعشاب الطبية والنباتات العلاجية. نورّد أجود الأصناف من مصادرها الطبيعية مباشرةً، مع ضمان أعلى معايير الجودة العالمية.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">اكتشف المنتجات</a>
+      <a href="#process" class="btn-outline">معايير الجودة</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><span class="stat-number">٢٠٠+</span><span class="stat-label">صنف عشبي</span></div>
+    <div class="stat-item"><span class="stat-number">٤٥</span><span class="stat-label">دولة تصدير</span></div>
+    <div class="stat-item"><span class="stat-number">٢٥</span><span class="stat-label">سنة خبرة</span></div>
+    <div class="stat-item"><span class="stat-number">١٢٠٠+</span><span class="stat-label">عميل راضٍ</span></div>
+  </div>
+</section>
+
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span> زعتر جبلي</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> بابونج مصري</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> حبة البركة</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> مريمية سورية</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> زنجبيل هندي</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> كركم ذهبي</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> نعناع أخضر</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> لافندر فرنسي</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> زعفران إيراني</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> قرفة سيلاني</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> زعتر جبلي</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> بابونج مصري</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> حبة البركة</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> مريمية سورية</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> زنجبيل هندي</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> كركم ذهبي</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> نعناع أخضر</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> لافندر فرنسي</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> زعفران إيراني</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> قرفة سيلاني</span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="about-bg-circle"></div>
+    <div class="about-bg-circle"></div>
+    <div class="about-visual-inner">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <path d="M150 280 Q145 200 140 150 Q130 100 100 60" stroke="#7A9E7E" stroke-width="3" fill="none" opacity="0.8"/>
+        <ellipse cx="100" cy="60" rx="30" ry="15" fill="#4A7C5F" opacity="0.9" transform="rotate(-30 100 60)"/>
+        <ellipse cx="115" cy="100" rx="25" ry="12" fill="#2D5A3D" opacity="0.8" transform="rotate(15 115 100)"/>
+        <ellipse cx="135" cy="145" rx="22" ry="11" fill="#4A7C5F" opacity="0.7" transform="rotate(-20 135 145)"/>
+        <path d="M150 200 Q165 160 185 120 Q195 95 210 70" stroke="#7A9E7E" stroke-width="2.5" fill="none" opacity="0.7"/>
+        <ellipse cx="210" cy="70" rx="28" ry="13" fill="#2D5A3D" opacity="0.8" transform="rotate(25 210 70)"/>
+        <ellipse cx="195" cy="105" rx="23" ry="11" fill="#4A7C5F" opacity="0.7" transform="rotate(-10 195 105)"/>
+        <circle cx="100" cy="62" r="5" fill="#C8A84B" opacity="0.9"/>
+        <circle cx="210" cy="72" r="4" fill="#C8A84B" opacity="0.8"/>
+        <circle cx="118" cy="98" r="4" fill="#E8C96B" opacity="0.7"/>
+        <circle cx="150" cy="280" r="8" fill="#C8A84B" opacity="0.6"/>
+        <circle cx="150" cy="280" r="4" fill="#E8C96B" opacity="0.9"/>
+        <circle cx="150" cy="150" r="100" stroke="#C8A84B" stroke-width="0.5" fill="none" opacity="0.3"/>
+        <circle cx="150" cy="150" r="120" stroke="#4A7C5F" stroke-width="0.3" fill="none" opacity="0.2"/>
+      </svg>
+    </div>
+  </div>
+  <div class="about-content fade-in">
+    <span class="section-tag">من نحن</span>
+    <h2 class="section-title">نحن جسر بين الطبيعة ومن يحتاجها</h2>
+    <div class="gold-divider"><span class="divider-ornament">✦</span></div>
+    <p class="section-body">تأسست جذور الطبيعة برؤية واضحة: إيصال أجود الأعشاب الطبية والنباتات العلاجية إلى يد كل من يحتاجها، سواء كان صيدلياً أو منتج مكملات غذائية أو صانع مستحضرات عشبية.</p>
+    <ul class="features-list">
+      <li><div class="feat-icon">🌱</div><div><strong>مصادر موثوقة</strong><br><span style="font-size:.83rem;color:var(--text-light)">نتعامل مباشرة مع المزارعين والمناطق الأصلية لكل عشبة</span></div></li>
+      <li><div class="feat-icon">🔬</div><div><strong>تحليل مخبري معتمد</strong><br><span style="font-size:.83rem;color:var(--text-light)">كل دفعة تخضع لاختبارات الجودة والنقاء في مختبراتنا</span></div></li>
+      <li><div class="feat-icon">🌍</div><div><strong>تصدير عالمي</strong><br><span style="font-size:.83rem;color:var(--text-light)">نشحن إلى أكثر من ٤٥ دولة مع توثيق كامل للشحنات</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <div class="products-header fade-in">
+    <span class="section-tag">منتجاتنا</span>
+    <h2 class="section-title">كنوز الطبيعة بين يديك</h2>
+    <p style="color:var(--text-light);max-width:480px;margin:.5rem auto 0;font-weight:300;line-height:1.9;font-size:.95rem">تشكيلة واسعة من الأعشاب الطبية المجففة والمستخلصات والزيوت العطرية</p>
+  </div>
+  <div class="products-grid">
+    <div class="product-card fade-in"><div class="product-icon">🌼</div><div class="product-name">البابونج الذهبي</div><div class="product-origin">مصر — الوادي الجديد</div><p class="product-desc">أجود أنواع البابونج المجفف، غني بالمواد الفعّالة العلاجية، مزروع عضوياً دون مبيدات كيميائية.</p><span class="product-tag">عضوي ✦ مجفف</span></div>
+    <div class="product-card fade-in"><div class="product-icon">⚫</div><div class="product-name">حبة البركة</div><div class="product-origin">إثيوبيا — السودان</div><p class="product-desc">بذور النيجيلا سيتيفا الأصيلة، مصدر لا ينضب لزيت الثيموكينون ذي الخصائص المذهلة.</p><span class="product-tag">بذور ✦ زيت</span></div>
+    <div class="product-card fade-in"><div class="product-icon">💛</div><div class="product-name">الكركم الملكي</div><div class="product-origin">الهند — إندونيسيا</div><p class="product-desc">جذور الكركم الكاملة والمطحونة، عالية تركيز الكوركيومين، معيار الذهب في الطب التكميلي.</p><span class="product-tag">مطحون ✦ جذور</span></div>
+    <div class="product-card fade-in"><div class="product-icon">🌿</div><div class="product-name">الزعتر الجبلي</div><div class="product-origin">جبال الشام — الأردن</div><p class="product-desc">قطف يدوي من المرتفعات الجبلية، يحتفظ بزيوته العطرية الطبيعية وتركيز عالٍ من الثيمول.</p><span class="product-tag">مجفف ✦ كامل</span></div>
+    <div class="product-card fade-in"><div class="product-icon">🌸</div><div class="product-name">لافندر بروفانس</div><div class="product-origin">جنوب فرنسا</div><p class="product-desc">أزهار اللافندر الحقيقية من منطقة بروفانس الفرنسية، لاستخراج الزيوت العطرية الفاخرة.</p><span class="product-tag">زهور ✦ زيت عطري</span></div>
+    <div class="product-card fade-in"><div class="product-icon">🔴</div><div class="product-name">الزعفران السلطاني</div><div class="product-origin">كشمير — إيران</div><p class="product-desc">خيوط الزعفران الأصيلة درجة ممتاز، محفوظة في ظروف مثالية للحفاظ على لونها ورائحتها.</p><span class="product-tag">فاخر ✦ مستورد</span></div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="process-header fade-in">
+    <span class="section-tag" style="color:var(--sage-light)">منهجيتنا</span>
+    <h2 class="section-title">من الحقل إلى يدك</h2>
+    <p style="color:var(--sage-light);max-width:480px;margin:.8rem auto 0;font-weight:300;line-height:1.9;font-size:.9rem">رحلة دقيقة محكومة بمعايير صارمة لضمان أن ما تتلقاه هو الأفضل</p>
+  </div>
+  <div class="process-steps fade-in">
+    <div class="process-step"><div class="step-circle" data-num="١">🌾</div><div class="step-title">الانتقاء والحصاد</div><p class="step-desc">نختار مزارعينا بعناية فائقة، ونشرف على مواسم الحصاد لاختيار التوقيت المثالي</p></div>
+    <div class="process-step"><div class="step-circle" data-num="٢">🔬</div><div class="step-title">الفحص والتحليل</div><p class="step-desc">كل دفعة تمر بسلسلة اختبارات معملية للتحقق من الهوية والنقاء والخلو من الملوثات</p></div>
+    <div class="process-step"><div class="step-circle" data-num="٣">✦</div><div class="step-title">المعالجة والتجفيف</div><p class="step-desc">تقنيات تجفيف متطورة تحافظ على المواد الفعّالة والخصائص العلاجية لكل عشبة</p></div>
+    <div class="process-step"><div class="step-circle" data-num="٤">📦</div><div class="step-title">التعبئة والشحن</div><p class="step-desc">تغليف مُحكم يحفظ الجودة، مع توثيق شامل وشهادات منشأ معتمدة لكل شحنة</p></div>
+  </div>
+</section>
+
+<section class="certs fade-in">
+  <span class="section-tag">اعتماداتنا</span>
+  <h2 class="section-title">شهادات دولية معتمدة</h2>
+  <div class="certs-grid">
+    <div class="cert-badge"><div class="cert-icon">🌿</div><div class="cert-name">Organic</div><div class="cert-sub">USDA / EU Organic</div></div>
+    <div class="cert-badge"><div class="cert-icon">⚗️</div><div class="cert-name">GMP</div><div class="cert-sub">Good Manufacturing Practice</div></div>
+    <div class="cert-badge"><div class="cert-icon">✅</div><div class="cert-name">ISO 22000</div><div class="cert-sub">Food Safety Management</div></div>
+    <div class="cert-badge"><div class="cert-icon">🔒</div><div class="cert-name">HACCP</div><div class="cert-sub">Hazard Analysis</div></div>
+    <div class="cert-badge"><div class="cert-icon">🌙</div><div class="cert-name">Halal</div><div class="cert-sub">Certified Halal</div></div>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-header fade-in">
+    <span class="section-tag">آراء عملائنا</span>
+    <h2 class="section-title">ثقة أبنيناها على مدى سنوات</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-in"><span class="quote-mark">"</span><p class="testimonial-text">تعاملنا مع جذور الطبيعة منذ أكثر من ثماني سنوات، والجودة لم تتراجع يوماً. منتجاتهم تلبّي المعايير الأوروبية الصارمة التي يفرضها سوقنا.</p><div class="testimonial-author"><div class="author-avatar">KM</div><div><div class="author-name">Karl Müller</div><div class="author-role">مدير التوريد — ألمانيا</div></div></div></div>
+    <div class="testimonial-card fade-in"><span class="quote-mark">"</span><p class="testimonial-text">ما يميزهم هو الشفافية الكاملة في التوثيق والتتبع. كل دفعة تأتي مع تحاليل مفصّلة تجعل التسجيل الصحي في بلدنا أسهل بكثير.</p><div class="testimonial-author"><div class="author-avatar">سع</div><div><div class="author-name">سامي العيسى</div><div class="author-role">مؤسس شركة أعشاب الخليج</div></div></div></div>
+    <div class="testimonial-card fade-in"><span class="quote-mark">"</span><p class="testimonial-text">نستورد الكركم والزنجبيل منذ خمس سنوات. الاتساق في الجودة والخدمة الاحترافية جعلاهم الشريك الأول لمصنعنا في تايوان.</p><div class="testimonial-author"><div class="author-avatar">LC</div><div><div class="author-name">Lin Chen</div><div class="author-role">مديرة التصنيع — تايوان</div></div></div></div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <h2>ابدأ شراكتك معنا اليوم</h2>
+  <p>سواء كنت تبحث عن كميات صغيرة أو شحنات تجارية كبيرة، فريقنا جاهز لتقديم عرض سعر مخصص وفق احتياجاتك تماماً</p>
+  <div class="cta-actions">
+    <a href="mailto:info@judhooralnatura.com" class="btn-primary">طلب عرض سعر</a>
+    <a href="tel:+201001234567" class="btn-outline">اتصل بنا الآن</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><span class="nav-logo">جذور <span>الطبيعة</span></span><p>شركة متخصصة في تجارة وتصدير الأعشاب الطبية والنباتات العلاجية على المستوى الدولي. نلتزم بأعلى معايير الجودة والاستدامة البيئية في كل ما نقدمه.</p></div>
+    <div class="footer-col"><h4>المنتجات</h4><ul><li><a href="#">أعشاب مجففة</a></li><li><a href="#">مستخلصات نباتية</a></li><li><a href="#">زيوت عطرية</a></li><li><a href="#">توابل طبية</a></li><li><a href="#">مساحيق عشبية</a></li></ul></div>
+    <div class="footer-col"><h4>الشركة</h4><ul><li><a href="#">عن جذور الطبيعة</a></li><li><a href="#">مزارعونا</a></li><li><a href="#">شهاداتنا</a></li><li><a href="#">المدونة</a></li><li><a href="#">فرص العمل</a></li></ul></div>
+    <div class="footer-col"><h4>التواصل</h4><ul><li><a href="#">القاهرة، مصر</a></li><li><a href="#">info@judhoor.com</a></li><li><a href="#">‎+20 100 123 4567</a></li><li><a href="#">واتساب للشركات</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© ٢٠٢٤ جذور الطبيعة — جميع الحقوق محفوظة</span>
+    <span>صُنع بـ <span class="footer-gold">✦</span> من قلب الطبيعة</span>
+  </div>
+</footer>
+
+<script>
+  const toggle=document.getElementById('navToggle');
+  const links=document.getElementById('navLinks');
+  toggle.addEventListener('click',()=>{toggle.classList.toggle('open');links.classList.toggle('open')});
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{toggle.classList.remove('open');links.classList.remove('open')}));
+  const obs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*100)})},{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){const h=this.getAttribute('href');if(h==='#')return;e.preventDefault();const t=document.querySelector(h);if(t)t.scrollIntoView({behavior:'smooth'})}));
+</script>
+</body>
+</html>
